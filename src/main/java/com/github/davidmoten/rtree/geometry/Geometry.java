@@ -1,4 +1,4 @@
-package com.github.davidmoten.rtree.geometry;
+package com.github.davidmoten.rtreemulti.geometry;
 
 /**
  * A geometrical region that represents an Entry spatially. It is recommended
@@ -38,6 +38,7 @@ public interface Geometry {
     Rectangle mbr();
 
     boolean intersects(Rectangle r);
+    
+    int dimensions();
 
-    boolean isDoublePrecision();
 }
