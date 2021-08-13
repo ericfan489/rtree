@@ -1,17 +1,14 @@
-package com.github.davidmoten.rtree.internal;
+package com.github.davidmoten.rtreemulti.internal;
 
 import java.util.List;
 
 import com.github.davidmoten.guavamini.Preconditions;
-import com.github.davidmoten.rtree.Context;
-import com.github.davidmoten.rtree.Entry;
-import com.github.davidmoten.rtree.Node;
-import com.github.davidmoten.rtree.NonLeaf;
-import com.github.davidmoten.rtree.geometry.Geometry;
-import com.github.davidmoten.rtree.geometry.Rectangle;
-
-import rx.Subscriber;
-import rx.functions.Func1;
+import com.github.davidmoten.rtreemulti.Context;
+import com.github.davidmoten.rtreemulti.Entry;
+import com.github.davidmoten.rtreemulti.Node;
+import com.github.davidmoten.rtreemulti.NonLeaf;
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.geometry.Rectangle;
 
 public final class NonLeafDefault<T, S extends Geometry> implements NonLeaf<T, S> {
 
@@ -29,12 +26,6 @@ public final class NonLeafDefault<T, S extends Geometry> implements NonLeaf<T, S
     @Override
     public Geometry geometry() {
         return mbr;
-    }
-
-    @Override
-    public void searchWithoutBackpressure(Func1<? super Geometry, Boolean> criterion,
-            Subscriber<? super Entry<T, S>> subscriber) {
-        NonLeafHelper.search(criterion, subscriber, this);
     }
 
     @Override
@@ -67,4 +58,10 @@ public final class NonLeafDefault<T, S extends Geometry> implements NonLeaf<T, S
     public List<Node<T, S>> children() {
         return (List<Node<T, S>>) children;
     }
+
+    @Override
+    public String toString() {
+        return "NonLeafDefault [mbr=" + mbr + ", children=" + children + "]";
+    }
+    
 }
