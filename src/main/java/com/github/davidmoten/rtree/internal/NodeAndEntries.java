@@ -1,11 +1,11 @@
-package com.github.davidmoten.rtree.internal;
+package com.github.davidmoten.rtreemulti.internal;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.github.davidmoten.guavamini.Optional;
-import com.github.davidmoten.rtree.Entry;
-import com.github.davidmoten.rtree.Node;
-import com.github.davidmoten.rtree.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.Entry;
+import com.github.davidmoten.rtreemulti.Node;
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
 
 /**
  * Used for tracking deletions through recursive calls.
