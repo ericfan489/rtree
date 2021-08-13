@@ -89,10 +89,6 @@ public class database_data {
 
         return result;
     }
-    //These are only the dimensions that the tree will be built upon
-    private static final List<Entry<Object, Point>> dimension_entries = MainTreeData.entriesList();
-    //These are all the attributes in the data
-    private static final List<Entry<Object, Point>> attribute_entries = MainTreeData.entriesList2();
 
     //total number of data points
     private static int size=10000;
@@ -100,19 +96,17 @@ public class database_data {
     //max nr of children
 
     //Create an R* tree with the dimension entries. Change the maxChildren, minChildren, dimensions as required.
-    //private static final RTree<Object, Point> tree = RTree.maxChildren(4).minChildren(2).dimensions(2).star().<Object, Point>create().add(dimension_entries);
 
     //For testing purposes, the result will be saved in .csv file on IntelliJ
     public static void main(String[] args) {
 
         // The below output will be saved in a .csv file
         // IntelliJ->Run->Configurations->Logs->Save console output to .csv file
-        //System.out.println(tree.asString3(tree, attribute_entries));
+
         database_data temp = new database_data();
         List<Entry<Object, Point>>attributes = temp.connect();
         RTree<Object, Point> test_tree = RTree.maxChildren(maxChildren).minChildren(minChildren).dimensions(dimensions).star().<Object, Point>create().add(attributes);
 
-        //Iterable<Entry<Object, Point>> search_test = test_tree.search(Rectangle.create(0,-80,0,0,0,0,0,50,0,1,1,1,1,1));
         Iterable<Entry<Object, Point>> search_test = test_tree.entries();
         Iterator my_iterator = search_test.iterator();
         while(my_iterator.hasNext()) {
