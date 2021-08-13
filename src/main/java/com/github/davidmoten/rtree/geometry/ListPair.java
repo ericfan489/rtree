@@ -1,4 +1,4 @@
-package com.github.davidmoten.rtree.geometry;
+package com.github.davidmoten.rtreemulti.geometry;
 
 import java.util.List;
 
