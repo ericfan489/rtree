@@ -1,11 +1,10 @@
-package com.github.davidmoten.rtree.internal;
+package com.github.davidmoten.rtreemulti.internal;
 
 import com.github.davidmoten.guavamini.Objects;
-import com.github.davidmoten.guavamini.Optional;
 import com.github.davidmoten.guavamini.Preconditions;
-import com.github.davidmoten.rtree.Entry;
-import com.github.davidmoten.rtree.geometry.Geometry;
-import com.github.davidmoten.rtree.internal.util.ObjectsHelper;
+import com.github.davidmoten.rtreemulti.Entry;
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.internal.util.ObjectsHelper;
 
 /**
  * An entry in the R-tree which has a spatial representation.
@@ -79,10 +78,10 @@ public final class EntryDefault<T, S extends Geometry> implements Entry<T, S> {
     @Override
     public boolean equals(Object obj) {
         @SuppressWarnings("rawtypes")
-        Optional<EntryDefault> other = ObjectsHelper.asClass(obj, EntryDefault.class);
-        if (other.isPresent()) {
-            return Objects.equal(value, other.get().value)
-                    && Objects.equal(geometry, other.get().geometry);
+        EntryDefault other = ObjectsHelper.asClass(obj, EntryDefault.class);
+        if (other != null) {
+            return Objects.equal(value, other.value)
+                    && Objects.equal(geometry, other.geometry);
         } else
             return false;
     }
