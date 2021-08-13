@@ -1,16 +1,13 @@
-package com.github.davidmoten.rtree.internal;
+package com.github.davidmoten.rtreemulti.internal;
 
 import java.util.List;
 
-import com.github.davidmoten.rtree.Context;
-import com.github.davidmoten.rtree.Entry;
-import com.github.davidmoten.rtree.Leaf;
-import com.github.davidmoten.rtree.Node;
-import com.github.davidmoten.rtree.geometry.Geometry;
-import com.github.davidmoten.rtree.geometry.Rectangle;
-
-import rx.Subscriber;
-import rx.functions.Func1;
+import com.github.davidmoten.rtreemulti.Context;
+import com.github.davidmoten.rtreemulti.Entry;
+import com.github.davidmoten.rtreemulti.Leaf;
+import com.github.davidmoten.rtreemulti.Node;
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.geometry.Rectangle;
 
 public final class LeafDefault<T, S extends Geometry> implements Leaf<T, S> {
 
@@ -32,12 +29,6 @@ public final class LeafDefault<T, S extends Geometry> implements Leaf<T, S> {
     @Override
     public List<Entry<T, S>> entries() {
         return entries;
-    }
-
-    @Override
-    public void searchWithoutBackpressure(Func1<? super Geometry, Boolean> condition,
-            Subscriber<? super Entry<T, S>> subscriber) {
-        LeafHelper.search(condition, subscriber, this);
     }
 
     @Override
@@ -63,6 +54,11 @@ public final class LeafDefault<T, S extends Geometry> implements Leaf<T, S> {
     @Override
     public Entry<T, S> entry(int i) {
         return entries.get(i);
+    }
+
+    @Override
+    public String toString() {
+        return "LeafDefault [mbr=" + mbr + ", entries=" + entries + "]";
     }
 
 }
