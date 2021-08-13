@@ -1145,7 +1145,6 @@ public final class RTree<T, S extends Geometry> {
 
         for(int i = 0; i < listc.size(); i++)
         {
-            System.out.println(listc.get(i).geometry().mbr()+ "\n");
             {if
             (     listc.get(i).geometry().mbr().min(0)>=node.geometry().mbr().min(0)
                             && listc.get(i).geometry().mbr().max(0)<=node.geometry().mbr().max(0)
