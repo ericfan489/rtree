@@ -1,15 +1,14 @@
-package com.github.davidmoten.rtree.internal;
+package com.github.davidmoten.rtreemulti.internal;
 
 import java.util.List;
 
-import com.github.davidmoten.rtree.Context;
-import com.github.davidmoten.rtree.Entries;
-import com.github.davidmoten.rtree.Entry;
-import com.github.davidmoten.rtree.Factory;
-import com.github.davidmoten.rtree.Leaf;
-import com.github.davidmoten.rtree.Node;
-import com.github.davidmoten.rtree.NonLeaf;
-import com.github.davidmoten.rtree.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.Context;
+import com.github.davidmoten.rtreemulti.Entry;
+import com.github.davidmoten.rtreemulti.Factory;
+import com.github.davidmoten.rtreemulti.Leaf;
+import com.github.davidmoten.rtreemulti.Node;
+import com.github.davidmoten.rtreemulti.NonLeaf;
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
 
 public final class FactoryDefault<T, S extends Geometry> implements Factory<T, S> {
 
@@ -34,7 +33,7 @@ public final class FactoryDefault<T, S extends Geometry> implements Factory<T, S
 
     @Override
     public Entry<T, S> createEntry(T value, S geometry) {
-        return Entries.entry(value, geometry);
+        return Entry.entry(value, geometry);
     }
 
 }
