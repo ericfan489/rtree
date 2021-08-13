@@ -17,7 +17,7 @@ public class time_test {
 
     private final String url = "jdbc:postgresql://130.203.223.234:5432/nsf_roadtraffic_friction_v2";
     private final String user = "ivsg_db_user";
-    private final String password = "ivsg@DB320";
+    private final String password = "#####";
 
     // Variables that can be changed to modify how the tree is built
 
