@@ -2,6 +2,7 @@ package com.github.davidmoten.rtree;
 
 import com.github.davidmoten.rtree.geometry.Geometry;
 import com.github.davidmoten.rtree.geometry.HasGeometry;
+import com.github.davidmoten.rtreemulti.internal.EntryDefault;
 
 public interface Entry<T, S extends Geometry> extends HasGeometry {
 
