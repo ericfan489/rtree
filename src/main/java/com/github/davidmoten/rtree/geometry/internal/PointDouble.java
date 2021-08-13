@@ -1,22 +1,21 @@
-package com.github.davidmoten.rtree.geometry.internal;
+package com.github.davidmoten.rtreemulti.geometry.internal;
 
-import com.github.davidmoten.rtree.geometry.Geometries;
-import com.github.davidmoten.rtree.geometry.Geometry;
-import com.github.davidmoten.rtree.geometry.Point;
-import com.github.davidmoten.rtree.geometry.Rectangle;
+import java.util.Arrays;
+
+import com.github.davidmoten.rtreemulti.geometry.Geometry;
+import com.github.davidmoten.rtreemulti.geometry.Point;
+import com.github.davidmoten.rtreemulti.geometry.Rectangle;
 
 public final class PointDouble implements Point {
 
-    private final double x;
-    private final double y;
+    private final double[] x;
 
-    private PointDouble(double x, double y) {
+    private PointDouble(double[] x) {
         this.x = x;
-        this.y = y;
     }
 
-    public static PointDouble create(double x, double y) {
-        return new PointDouble(x, y);
+    public static PointDouble create(double x[]) {
+        return new PointDouble(x);
     }
 
     @Override
@@ -26,27 +25,22 @@ public final class PointDouble implements Point {
 
     @Override
     public double distance(Rectangle r) {
-        return GeometryUtil.distance(x, y, r);
+        return GeometryUtil.distance(x, r);
     }
 
     @Override
     public boolean intersects(Rectangle r) {
-        return r.x1() <= x && x <= r.x2() && r.y1() <= y && y <= r.y2();
+        return GeometryUtil.intersects(x, x, r.mins(), r.maxes());
     }
 
     @Override
-    public double x() {
+    public double[] mins() {
         return x;
     }
 
     @Override
-    public double y() {
-        return y;
-    }
-
-    @Override
     public String toString() {
-        return "Point [x=" + x() + ", y=" + y() + "]";
+        return "Point " + Arrays.toString(mins());
     }
 
     @Override
@@ -55,66 +49,33 @@ public final class PointDouble implements Point {
     }
 
     @Override
-    public double x1() {
-        return x;
-    }
-
-    @Override
-    public double y1() {
-        return y;
-    }
-
-    @Override
-    public double x2() {
-        return x;
-    }
-
-    @Override
-    public double y2() {
-        return y;
-    }
-
-    @Override
-    public double area() {
+    public double volume() {
         return 0;
     }
 
     @Override
     public Rectangle add(Rectangle r) {
-        return Geometries.rectangle(Math.min(x, r.x1()), Math.min(y, r.y1()), Math.max(x, r.x2()),
-                Math.max(y, r.y2()));
+        return Rectangle.create(GeometryUtil.min(x, r.mins()), GeometryUtil.max(x, r.maxes()));
     }
 
     @Override
-    public boolean contains(double x, double y) {
-        return this.x == x && this.y == y;
+    public boolean contains(double... p) {
+        return Arrays.equals(x, p);
     }
 
     @Override
-    public double intersectionArea(Rectangle r) {
+    public double intersectionVolume(Rectangle r) {
         return 0;
     }
 
     @Override
-    public double perimeter() {
+    public double surfaceArea() {
         return 0;
-    }
-
-    @Override
-    public boolean isDoublePrecision() {
-        return true;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        long temp;
-        temp = Double.doubleToLongBits(x);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y);
-        result = prime * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        return Arrays.hashCode(x);
     }
 
     @Override
@@ -123,14 +84,14 @@ public final class PointDouble implements Point {
             return true;
         if (obj == null)
             return false;
-        if (getClass() != obj.getClass())
+        if (obj.getClass() != getClass())
             return false;
-        PointDouble other = (PointDouble) obj;
-        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))
-            return false;
-        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
-            return false;
-        return true;
+        return Arrays.equals(x, ((PointDouble) obj).x);
+    }
+
+    @Override
+    public int dimensions() {
+        return x.length;
     }
 
 }
